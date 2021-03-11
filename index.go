@@ -3,33 +3,19 @@ package main
 import (
 	"fmt"
 	"image/gif"
-	"log"
 	"os"
 )
-
 
 func main() {
 	readPath := "gif/booba.gif"
 	writePath := "gif/boobaRev.gif"
-	reader, err := os.Open(readPath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	
+	// ignore errors like any decent programmer
+	reader, _ := os.Open(readPath)
+	writer, _ := os.Create(writePath)
+	images, _ := gif.DecodeAll(reader)
 
-	writer, errrr := os.Create(writePath)
-	if errrr != nil {
-		log.Fatal(errrr)
-	}
-
-	images, error := gif.DecodeAll(reader)
-	if error != nil {
-		log.Fatal(error)
-	}
-
-	//revArr := make([]image.PalettedImage, 0, cap(images.Image))
-
-	//fmt.Println("Before loop: ", images)
-
+	// new gif yeya
 	newGif := gif.GIF{}
 	newGif.LoopCount = 0
 
